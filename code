@@ -14,9 +14,11 @@ rule find_whisper2
 		in_the_wild = "True"
   
   strings:
-    $a1 = {83 ec 1c 8b 44 24}             // HEX from offset @ 0x0400
+    $a1 = {00 00 38 67 fe ff}             	// HEX from offset @ 0x0400
+    $a2 = {ed 2c 45 e4 c1 45}			// certificate HEX from offset @ 0x013
         
   condition:
-    $a1
-    or hash.md5(0, filesize) == "5d5c99a08a7d927346ca2dafa7973fc1"    
+    $a1 or $a2
+    or hash.md5(0, filesize) == "14c8482f302b5e81e3fa1b18a509289d"    
+    or hash.md5(0, filesize) == "1a1395ef5fc0a90a5b83ac4b531eeac9"    
 } 
