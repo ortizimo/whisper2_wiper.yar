@@ -1,0 +1,22 @@
+// run with -sgr flags
+
+import "hash"
+import "pe"
+
+rule find_whisper2
+{					
+  meta:
+		author = "Saulo 'Sal' Ortiz, Sr. Cyber Forensics Analyst, ATG"
+		description = "Simple scan to search for WHISPER wiper used against Ukraine"
+		reference = "https://github.com/ortizimo/hermetic1.yar"
+		update = "2022-03-03
+		version = "1.0"
+		in_the_wild = "True"
+  
+  strings:
+    $a1 = {83 ec 1c 8b 44 24}             // HEX from offset @ 0x0400
+        
+  condition:
+    $a1
+    or hash.md5(0, filesize) == "5d5c99a08a7d927346ca2dafa7973fc1"    
+} 
