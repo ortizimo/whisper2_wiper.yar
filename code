@@ -1,4 +1,3 @@
-// run with -sgr flags
 
 import "hash"
 import "pe"
